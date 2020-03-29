@@ -38,7 +38,7 @@ public class AppTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudentNullId() {
+    public void addStudentWrongId() {
         Student student = sampleStudent;
         student.setID(null);
         srv.add(student);
