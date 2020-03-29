@@ -107,4 +107,32 @@ public class AppTest {
         Student student = new Student("1", "John Doe", 937, "john@doe.com", "Johnatan");
         assertEquals(srv.add(student), student);
     }
+
+    @Test(expected = ValidationException.class)
+    public void addStudentWithWrongEmail1() {
+        Student student = sampleStudent;
+        student.setMail("stuent.com");
+        srv.add(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudentWithWrongEmail2() {
+        Student student = sampleStudent;
+        student.setMail("stndent@com");
+        srv.add(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudentWithWrongEmail3() {
+        Student student = sampleStudent;
+        student.setMail("studentcom");
+        srv.add(student);
+    }
+
+    @Test()
+    public void addStudentWithOkEmail() {
+        Student student = sampleStudent;
+        student.setMail("student@scs.com");
+        assertEquals(srv.add(student), student);
+    }
 }
