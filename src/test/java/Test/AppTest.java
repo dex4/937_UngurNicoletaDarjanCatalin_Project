@@ -41,7 +41,9 @@ public class AppTest {
     public void addStudentWrongId() {
         Student student = sampleStudent;
         student.setID(null);
-        srv.add(student);
+        assertEquals(student,
+                srv.add(student));
+        
     }
 
     //Solves for id == "" and length of id < 1
