@@ -71,7 +71,7 @@ public class AppTest {
     @Test(expected = ValidationException.class)
     public void addStudentWithWrongGroup2() {
         Student student = new Student("1", "John Doe", 101, "john@doe.com", "Johnatan");
-        assertEquals(srv.add(student), student);
+        srv.add(student);
     }
 
     @Test(expected = ValidationException.class)
