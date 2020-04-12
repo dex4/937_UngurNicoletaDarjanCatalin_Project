@@ -45,9 +45,43 @@ public class AppTest {
                 new Teme(2, "not so important", 3, 5).toString().trim());
     }
 
+    @Test (expected = ValidationException.class)
+    public void addTemaWrongID() {
+        Teme tema = sampleTema;
+        tema.setID(null);
+        assertEquals(tema,
+                serviceTeme.add(tema));
+    }
+
+    //Solves for id < 0
+    @Test(expected = ValidationException.class)
+    public void addTemaNegativeID() {
+        Teme tema = sampleTema;
+        tema.setID(-1);
+        assertEquals(tema,
+                serviceTeme.add(tema));
+    }
+
+    @Test
+    public void addTemaDuplicateID() {
+        assertNotSame(new Teme(12, "blalalala",3 , 5),
+                serviceTeme.add(new Teme(12, "BLALALAL",3 , 5)));
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addTemaWithNullDescription() {
+        Teme tema = new Teme(1, "",6 , 5);
+        serviceTeme.add(tema);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addTemaWithInvalidDeadline() {
+        Teme tema = new Teme(1, "",5 , 3);
+        serviceTeme.add(tema);
+    }
+
     @Test
     public void addStudent() {
-
         assertEquals(new Student("123", "asda", 933, "asda@asda.casd", "asda"),
                 srv.add(new Student("123", "asda", 933, "asda@asda.casd", "asda")));
     }
