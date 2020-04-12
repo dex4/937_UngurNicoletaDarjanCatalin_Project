@@ -80,6 +80,19 @@ public class AppTest {
         serviceTeme.add(tema);
     }
 
+    @Test(expected = ValidationException.class)
+    public void addTemaWithNegativeReceivedWeek() {
+        Teme tema = new Teme(1, "",-6 , 5);
+        serviceTeme.add(tema);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addTemaWithNegativeDeadline() {
+        Teme tema = new Teme(1, "",6 , -5);
+        serviceTeme.add(tema);
+    }
+
+
     @Test
     public void addStudent() {
         assertEquals(new Student("123", "asda", 933, "asda@asda.casd", "asda"),
