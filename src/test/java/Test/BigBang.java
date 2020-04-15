@@ -17,6 +17,9 @@ import Validator.NotaValidator;
 
 
 import org.junit.Test;
+
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
@@ -37,11 +40,25 @@ public class BigBang {
 
     private NoteRepo noteRepo = new NoteRepo(noteValidator);
     private ServiceNote serviceNote = new ServiceNote(noteRepo);
-    //private Nota sampleNota = new Nota("1",sampleStudent, sampleTema,10, 2);
+    private HashMap<String, Integer> noteMap = new HashMap<>();
+
+    private Nota sampleNota;
+
+    private Nota getSampleNota() {
+        Nota nota = null;
+        noteMap.put("1", 1);
+        for (HashMap.Entry<String, Integer> it : noteMap.entrySet()) {
+            if (it.getValue() == 1) {
+                nota = new Nota(it, sampleStudent, sampleTema, 10, 2);
+            }
+        }
+        return nota;
+    }
 
 
     @Test
     public void addStudentBBTest() {
+
         assertEquals(new Student("123", "asda", 933, "asda@asda.casd", "asda"),
                 srv.add(new Student("123", "asda", 933, "asda@asda.casd", "asda")));
     }
@@ -51,6 +68,7 @@ public class BigBang {
         assertEquals(serviceTeme.add(sampleTema).toString().trim(),
                 new Teme(1, "very important", 3, 5).toString().trim());
     }
+
     @Test
     public void bigBangIntegration() {
         addStudentBBTest();
