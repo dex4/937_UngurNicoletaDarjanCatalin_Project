@@ -46,9 +46,9 @@ public class BigBang {
 
     private Nota getSampleNota() {
         Nota nota = null;
-        noteMap.put("1", 1);
+        noteMap.put("2", 2);
         for (HashMap.Entry<String, Integer> it : noteMap.entrySet()) {
-            if (it.getValue() == 1) {
+            if (it.getValue() == 2) {
                 nota = new Nota(it, sampleStudent, sampleTema, 10, 2);
             }
         }
@@ -70,10 +70,16 @@ public class BigBang {
     }
 
     @Test
+    public void addNoteBBTest() {
+        Nota nota = serviceNote.add(getSampleNota(), "Good");
+        assertNotSame(nota, getSampleNota().toString().trim());
+    }
+
+    @Test
     public void bigBangIntegration() {
         addStudentBBTest();
         addTemeBBTest();
-
+        addNoteBBTest();
     }
 
 }
